@@ -1,0 +1,19 @@
+version: "2"
+
+volumes:
+    data:
+    logs:
+    backups:
+
+services:
+    app:
+        image: ebonharme/images:plexy
+        environment:
+            - TZ=${TZ}
+        volumes:
+            - "data:/data"
+            - "backups:/backups"
+            - "logs:/logs"
+        ports:
+            - "8181:8181"
+

@@ -1,0 +1,13 @@
+.catalog:
+  name: Plexy
+  version: 1.4-rancher1
+  description: |
+    A python based web application for monitoring, analytics and notifications for [Plex Media Server](https://plex.tv).
+  questions:
+    - variable: "TZ"
+      type: "string"
+      required: true
+      label: "Time Zone"
+      description: "TZ value for your location from https://en.wikipedia.org/wiki/List_of_tz_database_time_zones"
+      default: "Europe/London"
+

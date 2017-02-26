@@ -1,0 +1,8 @@
+name: PlexPy
+description: |
+    A python based web application for monitoring, analytics and notifications for Plex Media Server.
+version: 1.4-rancher1
+category: Entertainment
+maintainer: Eric Bonharme <eric.bonharme@gmail.com>
+license: The MIT Licence
+projectURL: https://github.com/ebonharme/images/
