@@ -1,0 +1,59 @@
+version: '2'
+
+volumes:
+    droneci-etc:
+        driver: rancher-nfs
+    droneci-rancher:
+        driver: rancher-nfs
+    droneci-lib:
+        driver: rancher-nfs
+networks:
+
+services:
+    drone-lb:
+        ports:
+          - ${public_port}:8000
+        tty: true
+        image: rancher/lb-service-haproxy:v0.5.9
+        volumes:
+            - droneci-rancher
+        stdin_open: true
+
+    drone-healthcheck:
+        image: rancher/drone-config:v0.1.0
+        network_mode: 'container:drone-server'
+        volumes:
+            - droneci-rancher
+        entrypoint: /giddyup health
+
+    drone-server:
+        image: rancher/drone-config:v0.1.0
+        volumes:
+            - droneci-etc
+            - droneci-rancher
+            - droneci-lib
+        labels: 
+            io.rancher.sidekicks: drone-daemon,drone-healthcheck
+        external_links:
+            - ${database_service}:database
+
+    drone-daemon:
+        image: rancher/drone:0.4
+        network_mode: 'container:drone-server'
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+  volumes_from:
+    - drone-data-volume
+  entrypoint: /opt/rancher/rancher_entry.sh
+
+## Do not change below. Could cause data loss in upgrade.
+drone-data-volume:
+  image: busybox
+  net: none
+  command: /bin/true
+  labels:
+    io.rancher.container.start_once: 'true'
+  volumes:
+    - /var/lib/drone
+    - /etc/drone
+    - /opt/rancher
