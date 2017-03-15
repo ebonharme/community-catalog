@@ -10,4 +10,10 @@
       label: "Time Zone"
       description: "TZ value for your location from https://en.wikipedia.org/wiki/List_of_tz_database_time_zones"
       default: "Europe/London"
+    - variable: "VOLUME_DRIVER"
+      type: "string"
+      required: true
+      label: "Volume Driver"
+      description: "Rancher Storage pool where persistent data should be stored"
+      default: rancher-nfs
 

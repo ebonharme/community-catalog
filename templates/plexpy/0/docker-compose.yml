@@ -1,19 +1,28 @@
-version: "2"
-
+version: '2'
 volumes:
-    data:
-    logs:
-    backups:
-
+  plexpy-logs:
+    external: true
+    driver: ${VOLUME_DRIVER}
+  plexpy-backups:
+    external: true
+    driver: ${VOLUME_DRIVER}
+  plexpy-data:
+    external: true
+    driver: ${VOLUME_DRIVER}
 services:
-    app:
-        image: ebonharme/images:plexy
-        environment:
-            - TZ=${TZ}
-        volumes:
-            - "data:/data"
-            - "backups:/backups"
-            - "logs:/logs"
-        ports:
-            - "8181:8181"
-
+  app:
+    image: ebonharme/images:plexpy
+    stdin_open: true
+    volumes:
+    - plexpy-data:/data
+    - plexpy-backups:/backups
+    - plexpy-logs:/logs
+    tty: true
+    ports:
+    - 443/tcp
+    - 8181/tcp
+    env:
+    - TZ=${TZ}
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.scheduler.affinity:host_label: host_persistence=permanent
