@@ -21,7 +21,7 @@ services:
     ports:
     - 443/tcp
     - 8181/tcp
-    env:
+    environment:
     - TZ=${TZ}
     labels:
       io.rancher.container.pull_image: always
