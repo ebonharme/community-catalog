@@ -1,0 +1,59 @@
+.catalog:
+  name: SABnzbd
+  version: 1.4-rancher1
+  description: |
+    See [SABnzbd](https://sabnzbd.org/) website for details.
+    For compatibility with nzbToMedia, I should set the following values:
+      - dirscan_dir = /mnt/Downloads
+      - download_dir = /mnt/Downloads/incomplete/sabnzbd
+      - complete_dir = /mnt/Downloads/complete/sabnzbd
+      - script_dir = /mnt/Downloads/nzbToMedia
+  questions:
+    - variable: "SABNZBD_UID"
+      type: "int"
+      required: true
+      label: "UID"
+      description: "User ID running the sabnzbd process"
+      default: 816
+    - variable: "SABNZBD_GID"
+      type: "int"
+      required: true
+      label: "GID"
+      description: "Group ID running the sabnzbd process"
+      default: 816
+    - variable: "DATA_DIR"
+      type: "string"
+      require: true
+      label: Data Directory
+      description: "Location where data files should be stored inside the container"
+      default: "/mnt/Downloads"
+    - variable: "NFS_HOST"
+      type: "string"
+      required: true
+      label: NFS Host
+      description: IP address or hostname of NFS host holding the data directory
+      default: 192.168.2.99
+    - variable: "NFS_PATH"
+      type: "string"
+      required: true
+      label: NFS Path
+      description: Path on the NFS host
+      default: /mnt/FreeNAS/Downloads
+    - variable: "CMD_PARAMS"
+      type: "string"
+      required: false
+      label: Command Parameters
+      description: Additional startup parameters as shown on https://sabnzbd.org/wiki/advanced/command-line-parameters
+      default: "--browser 0 --logging 2"
+    - variable: "VOLUME_DRIVER"
+      type: "string"
+      required: true
+      label: "Volume Driver"
+      description: "Rancher Storage pool where persistent data should be stored"
+      default: rancher-nfs
+    - variable: "TZ"
+      type: "string"
+      required: true
+      label: "Time Zone"
+      description: "TZ value for your location from https://en.wikipedia.org/wiki/List_of_tz_database_time_zones"
+      default: "Europe/London"
