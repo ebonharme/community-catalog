@@ -1,0 +1,8 @@
+name: SABnzbd
+description: |
+    Free and easy binary newsreader
+version: 1.4-rancher1
+category: Entertainment
+maintainer: Eric Bonharme <eric.bonharme@gmail.com>
+license: The MIT Licence
+projectURL: https://github.com/ebonharme/images

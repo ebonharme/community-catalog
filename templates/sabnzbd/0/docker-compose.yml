@@ -1,0 +1,30 @@
+version: '2'
+volumes:
+  sabnzbd-data:
+    external: true
+    driver: ${VOLUME_DRIVER}
+  sabnzbd-config:
+    external: true
+    driver: ${VOLUME_DRIVER}
+services:
+  app:
+    image: ebonharme/images:sabnzbd
+    stdin_open: true
+    volumes:
+    - sabnzbd-data:${DATA_DIR}
+    - sabnzbd-config:/config
+    tty: true
+    ports:
+    - 8080/tcp
+    environment:
+    - TZ=${TZ}
+    - SABNZBD_UID=${SABNZBD_UID}
+    - SABNZBD_GID=${SABNZBD_GID}
+    - CONFIG=/config/sabnzbd.ini
+    - CMD_PARAMS=${CMD_PARAMS}
+    - NFS_HOST=${NFS_HOST}
+    - NFS_PATH=${NFS_PATH}
+    - DATA_DIR=${DATA_DIR}
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.scheduler.affinity:host_label: host_persistence=permanent
