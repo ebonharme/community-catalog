@@ -10,6 +10,7 @@ services:
   app:
     image: ebonharme/images:sabnzbd
     stdin_open: true
+    privileged: true
     volumes:
     - sabnzbd-data:${DATA_DIR}
     - sabnzbd-config:/config
