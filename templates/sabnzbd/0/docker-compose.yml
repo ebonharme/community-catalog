@@ -28,4 +28,4 @@ services:
     - DATA_DIR=${DATA_DIR}
     labels:
       io.rancher.container.pull_image: always
-      io.rancher.scheduler.affinity:host_label: host_persistence=permanent
+      io.rancher.scheduler.affinity:host_label: size=large
