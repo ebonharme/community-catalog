@@ -9,18 +9,6 @@
       - complete_dir = /mnt/Downloads/complete/sabnzbd
       - script_dir = /mnt/Downloads/nzbToMedia
   questions:
-    - variable: "SABNZBD_UID"
-      type: "int"
-      required: true
-      label: "UID"
-      description: "User ID running the sabnzbd process"
-      default: 816
-    - variable: "SABNZBD_GID"
-      type: "int"
-      required: true
-      label: "GID"
-      description: "Group ID running the sabnzbd process"
-      default: 816
     - variable: "DATA_DIR"
       type: "string"
       require: true
