@@ -1,0 +1,14 @@
+.catalog:
+  name: Redis
+  version: 0.3-rancher1
+  description: Redis Cluster
+  uuid: redis-cluster
+  questions: #Used to request user input for configuration options
+version: '2'
+services:
+  master:
+    scale: 1
+  slave:
+    scale: 2
+  sentinel:
+    scale: 3

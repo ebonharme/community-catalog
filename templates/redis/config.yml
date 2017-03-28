@@ -1,0 +1,8 @@
+name: Redis Cluster
+description: |
+  Redis is an open source key-value store that functions as a data structure server
+version: 0.3-rancher1
+category: Clustering
+maintainer: Eric Bonharme
+license: MIT
+projectURL: https://redis.io
