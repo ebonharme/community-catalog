@@ -9,10 +9,10 @@ catalog:
   questions:
     - variable: drone_host
       label: Drone Host Name
-      description: Intended hostname Drone Server will be hosted on, e.g. server.%{{stack_name}}.%{{environment_name}}.mycompany.com
+      description: Intended hostname Drone Server will be hosted on, e.g. server.drone7.<environment_name>.mycompany.com
       required: true
       type: string
-      default: "server.%{{stack_name}}.%{{environment_name}}.mycompany.com"
+      default: "server.drone7.environment.mycompany.com"
     - variable: drone_server_scheme
       label: Drone Server Scheme
       description: Intended Scheme Drone will be hosted on ()
@@ -21,13 +21,12 @@ catalog:
       options:
         - "http"
         - "https"
-
-    - variable: host_port
-      label: Drone Server Host Port
-      description: Public port that will be exposed on service creation.
-      required: true
-      default: 8000
-      type: int
+    # - variable: host_port
+    #   label: Drone Server Host Port
+    #   description: Public port that will be exposed on service creation.
+    #   required: true
+    #   default: 8000
+    #   type: int
     - variable: agent_scale
       label: Drone Agent Scale
       description: Drone agent scale to deploy
