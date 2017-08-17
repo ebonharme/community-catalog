@@ -1,7 +1,7 @@
 version: '2'
 services:
   agent:
-    image: drone/drone:${drone_version}
+    image: drone/agent:${drone_version}
     environment:
       DRONE_SERVER: ${drone_server}
       DRONE_SECRET: ${drone_secret}
@@ -29,7 +29,7 @@ services:
   server:
     image: drone/drone:${drone_version}
     environment:
-      DRONE_HOST: ${drone_server_scheme}://${drone_host}
+      DRONE_HOST: ${drone_host}
       GIN_MODE: ${gin_mode}
 {{- if (.Values.drone_debug)}}
       DRONE_DEBUG: '${drone_debug}'
@@ -107,13 +107,10 @@ services:
       io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
       io.rancher.container.hostname_override: container_name
 {{- end}}
-#  lb:
-#    image: rancher/lb-service-haproxy:v0.6.4
-#    ports:
-#      - ${host_port}:${host_port}
-#    labels:
-#      io.rancher.scheduler.global: 'true'
-#      io.rancher.scheduler.affinity:host_label_soft: ${drone_lb_host_label} -->
-secrets:
-  DRONE_SECRET:
-    external: true
+  lb:
+    image: rancher/lb-service-haproxy:v0.6.4
+    ports:
+      - ${host_port}:${host_port}
+    labels:
+      io.rancher.scheduler.global: 'true'
+      io.rancher.scheduler.affinity:host_label_soft: ${drone_lb_host_label}
